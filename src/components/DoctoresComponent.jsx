@@ -1,34 +1,36 @@
 import React, { Component } from "react";
-import Global from "../Global";
-import axios from "axios";
 import DetallesDoctorComponent from "./DetallesDoctorComponent";
+import ServiceHospitales from "../services/ServiceHospitales";
 
 export default class DoctoresComponent extends Component {
-  url = Global.urlApiDoctores;
+  service = new ServiceHospitales();
 
   state = {
     doctores: [],
     idDoctorSeleccionado: null,
   };
 
-  loadDoctoresByHospital = () => {
-    axios
-      .get(this.url + "api/Doctores/DoctoresHospital/" + this.props.idhospital)
-      .then((res) => {
+  getDoctoresByHospital = () => {
+    this.service
+      .getDoctoresByHospitalId(this.props.idhospital)
+      .then((result) => {
         this.setState({
-          doctores: res.data,
+          doctores: result,
           idDoctorSeleccionado: null,
         });
       });
   };
 
   componentDidMount = () => {
-    this.loadDoctoresByHospital();
+    this.getDoctoresByHospital();
   };
 
   componentDidUpdate = (prevProps) => {
     if (this.props.idhospital !== prevProps.idhospital) {
-      this.loadDoctoresByHospital();
+      this.getDoctoresByHospital();
+      this.setState({
+        idDoctorSeleccionado: null,
+      });
     }
   };
 

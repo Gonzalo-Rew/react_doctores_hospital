@@ -82,10 +82,20 @@ export default class MenuComponent extends Component {
                 })}
               </ul>
             </li>
-            <li className="nav-item">
-              <a className="nav-link disabled" href="#disabled">
-                Disabled
-              </a>
+            <li className="nav-item active">
+              <NavLink to="/hospitales" className="nav-link">
+                Hospitales
+              </NavLink>
+            </li>
+            <li className="nav-item active">
+              <NavLink to="/create-hospital" className="nav-link">
+                New Holpital
+              </NavLink>
+            </li>
+            <li className="nav-item active">
+              <NavLink to="/ejemplo-service" className="nav-link">
+                Clase servicio
+              </NavLink>
             </li>
           </ul>
         </div>
